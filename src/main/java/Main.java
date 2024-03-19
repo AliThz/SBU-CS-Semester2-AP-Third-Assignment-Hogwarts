@@ -168,7 +168,7 @@ public class Main {
     //region [ - runAssistantMenu(Assistant assistant) - ]
     public static void runAssistantMenu(Assistant assistant) {
         System.out.flush();
-        System.out.printf("-- Welcome %s %s (%s) !\n  1,Response requested accounts\n  2,Response requested courses\n  3,Remove a professor\n  4,Remove a student\n  5,View course and their list of students\n  6,View a professor profile\n  7,View a student profile\n  8,Create a course\n  9,Score Student\n  10,Sign up a Assistant\n  11,Log out\nChoose one of the options above :  ", assistant.firstName, assistant.lastName, assistant.account.getRole());
+        System.out.printf("-- Welcome %s %s (%s) !\n  1,Response requested accounts\n  2,Response requested courses\n  3,Remove a professor\n  4,Remove a student\n  5,View course and their list of students\n  6,View a professor profile\n  7,View a student profile\n  8,Create a course\n  9,Score Student\n  10,Sign up a Assistant\n  11,Change Username & Password\n  12,Log out\nChoose one of the options above :  ", assistant.firstName, assistant.lastName, assistant.account.getRole());
 
         Scanner parameterScanner = new Scanner(System.in);
         Scanner commandScanner = new Scanner(System.in);
@@ -260,6 +260,15 @@ public class Main {
                 assistant.signUp(new Assistant(new Account(userName, password, "Assistant"), firstName, lastName, age));
                 break;
             case 11:
+                System.out.print("New Username :  ");
+                userName = parameterScanner.next();
+                parameterScanner.nextLine();
+                System.out.print("New Password :  ");
+                password = parameterScanner.next();
+
+                assistant.account.changeUsername(userName);
+                assistant.account.changePassword(password);
+            case 12:
                 assistant.logOut();
                 runMenu();
                 break;
@@ -279,7 +288,7 @@ public class Main {
     //region [ - runProfessorMenu(Professor professor) - ]
     public static void runProfessorMenu(Professor professor) {
         System.out.flush();
-        System.out.printf("\n-- Welcome %s %s (%s) Score: %d \n  1,Take Courses\n  2,Score Students\n  3,View Courses List\n  4,View Course's List of Students\n  5,Log Out\nChoose one of the options above :  ", professor.firstName, professor.lastName, professor.account.getRole(), professor.getScore());
+        System.out.printf("\n-- Welcome %s %s (%s) Score: %d \n  1,Take Courses\n  2,Score Students\n  3,View Courses List\n  4,View Course's List of Students\n  5,Change Username & Password\n  6,Log Out\nChoose one of the options above :  ", professor.firstName, professor.lastName, professor.account.getRole(), professor.getScore());
 
         Scanner parameterScanner = new Scanner(System.in);
         Scanner commandScanner = new Scanner(System.in);
@@ -323,6 +332,16 @@ public class Main {
                 professor.viewCourseStudents(course);
                 break;
             case 5:
+                String userName, password;
+                System.out.print("New Username :  ");
+                userName = parameterScanner.next();
+                parameterScanner.nextLine();
+                System.out.print("New Password :  ");
+                password = parameterScanner.next();
+
+                professor.account.changeUsername(userName);
+                professor.account.changePassword(password);
+            case 6:
                 professor.logOut();
                 runMenu();
                 break;
@@ -342,7 +361,7 @@ public class Main {
     //region [ - runStudentMenu(Student student) - ]
     public static void runStudentMenu(Student student) {
         System.out.flush();
-        System.out.printf("-- Welcome %s %s (%s)\n  1,Take Courses\n  2,View ALl Courses\n  3,View All Professors\n  4,Rating and Message Professors\n  5,Log Out\nChoose one of the options above :  ", student.firstName, student.lastName, student.account.getRole());
+        System.out.printf("-- Welcome %s %s (%s)\n  1,Take Courses\n  2,View ALl Courses\n  3,View All Professors\n  4,Rating and Message Professors\n  5,Change Username & Password\n  6,Log Out\nChoose one of the options above :  ", student.firstName, student.lastName, student.account.getRole());
 
         Scanner parameterScanner = new Scanner(System.in);
         Scanner commandScanner = new Scanner(System.in);
@@ -374,6 +393,16 @@ public class Main {
                 Hogwarts.rateProfessor(professor, score);
                 break;
             case 5:
+                String userName, password;
+                System.out.print("New Username :  ");
+                userName = parameterScanner.next();
+                parameterScanner.nextLine();
+                System.out.print("New Password :  ");
+                password = parameterScanner.next();
+
+                student.account.changeUsername(userName);
+                student.account.changePassword(password);
+            case 6:
                 student.logOut();
                 runMenu();
                 break;
