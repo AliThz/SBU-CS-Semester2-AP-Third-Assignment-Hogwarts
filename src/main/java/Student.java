@@ -36,6 +36,7 @@ public class Student extends Person {
     public Student(Account account, String firstName, String lastName, int age) {
         super(account, firstName, lastName, age);
         courses = new ArrayList<>();
+        hasLoggedIn = false;
         sort();
     }
     //endregion
@@ -43,6 +44,7 @@ public class Student extends Person {
     //region [ - Student(Account account) - ]
     public Student(Account account) {
         super(account);
+        hasLoggedIn = false;
         sort();
     }
     //endregion

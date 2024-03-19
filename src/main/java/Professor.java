@@ -78,6 +78,7 @@ public class Professor extends Person {
     public Professor(Account account) {
         super(account);
         courses = new ArrayList<>();
+        hasAccess = true;
     }
     //endregion
 

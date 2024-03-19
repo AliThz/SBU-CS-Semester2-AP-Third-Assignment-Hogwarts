@@ -111,7 +111,7 @@ public class Main {
     //region [ - signUp() - ]
     public static void signUp() {
         System.out.flush();
-        System.out.print("-- Login\n  1,Professor\n  2,Student\n  3,Back\nChoose one of the options above :  ");
+        System.out.print("-- Sign Up\n  1,Professor\n  2,Student\n  3,Back\nChoose one of the options above :  ");
 
         Scanner scanner = new Scanner(System.in);
         int command = scanner.nextInt();
@@ -139,7 +139,8 @@ public class Main {
                 professor.signUp();
                 break;
             case 2:
-                Hogwarts.addStudent(new Student(new Account(userName, password, "Student"), firstName, lastName, age));
+                Student student = new Student(new Account(userName, password, "Student"), firstName, lastName, age);
+                Hogwarts.addStudent(student);
                 break;
             case 3:
                 runMenu();
