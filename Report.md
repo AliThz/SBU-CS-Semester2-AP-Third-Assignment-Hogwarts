@@ -49,7 +49,7 @@ Hogwarts School of Witchcraft and Wizardry Management System
 
 * Designing in terminal :)
 
-## About using project
+## About using the project
 
 * If you are using Intellij, after opening the project click (ctrl) + (shift) + (-) to fold regions and make it easier to trace the code.
 * Professors don't have access to do nearly anything in their dashboard panel right after signing up. After signing up, an admin should approve the professor's account in him/her own dashboard.
