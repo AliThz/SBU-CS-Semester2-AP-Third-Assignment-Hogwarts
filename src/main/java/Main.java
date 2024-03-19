@@ -43,13 +43,21 @@ public class Main {
         switch (command) {
             case 1:
                 login();
+                break;
             case 2:
                 signUp();
+                break;
             case 3:
                 System.exit(0);
+                break;
             default:
                 System.out.print("\n!! Invalid Choice !!\n");
                 runMenu();
+        }
+        System.out.println("0,Back");
+        int backCommand = commandScanner.nextInt();
+        if (backCommand == 0) {
+            runMenu();
         }
     }
     //endregion
@@ -136,11 +144,11 @@ public class Main {
         switch (command) {
             case 1:
                 Professor professor = new Professor(new Account(userName, password, "Professor"), firstName, lastName, age);
-                professor.signUp();
+                professor.signUp(professor);
                 break;
             case 2:
                 Student student = new Student(new Account(userName, password, "Student"), firstName, lastName, age);
-                Hogwarts.addStudent(student);
+                student.signUp(student);
                 break;
             case 3:
                 runMenu();
@@ -148,6 +156,11 @@ public class Main {
             default:
                 System.out.print("\n!! Invalid Choice !!");
                 login();
+        }
+        System.out.println("0,Back");
+        int backCommand = scanner.nextInt();
+        if (backCommand == 0) {
+            runMenu();
         }
     }
     //endregion
@@ -362,6 +375,7 @@ public class Main {
                 break;
             case 5:
                 student.logOut();
+                runMenu();
                 break;
             default:
                 System.out.print("\n!! Invalid Choice !!");
