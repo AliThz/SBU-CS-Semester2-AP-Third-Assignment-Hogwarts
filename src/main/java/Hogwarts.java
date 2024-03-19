@@ -115,6 +115,18 @@ public class Hogwarts {
     }
     //endregion
 
+    //region [ - addRequestedCourse(Course course) - ]
+    public static void addRequestedCourse(Course course) {
+        for (Course c : rawCourses) {
+            if (Objects.equals(c.getTitle(), course.getTitle())) {
+                System.out.println("!! This course is already available !!");
+                return;
+            }
+        }
+        requestedCourses.add(new Course(course.getTitle()));
+    }
+    //endregion
+
     //region [ - removeAccount(Account account) - ]
     public static void removeAccount(Account account) {
         accounts.remove(account);
@@ -148,6 +160,18 @@ public class Hogwarts {
     //region [ - removeCourse(Course course) - ]
     public static void removeCourse(Course course) {
         courses.remove(course);
+    }
+    //endregion
+
+    //region [ - removeRawCourse(Course course) - ]
+    public static void removeRawCourse(Course course) {
+        rawCourses.remove(course);
+    }
+    //endregion
+
+    //region [ - removeRequestedCourse(Course course) - ]
+    public static void removeRequestedCourse(Course course) {
+        requestedCourses.remove(course);
     }
     //endregion
 

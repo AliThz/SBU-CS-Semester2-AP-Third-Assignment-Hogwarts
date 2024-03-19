@@ -69,7 +69,7 @@ public class Professor extends Person {
     public Professor(Account account, String firstName, String lastName, int age) {
         super(account, firstName, lastName, age);
         score = 0;
-        hasAccess = true;
+        hasAccess = false;
         courses = new ArrayList<>();
     }
     //endregion
@@ -78,7 +78,7 @@ public class Professor extends Person {
     public Professor(Account account) {
         super(account);
         courses = new ArrayList<>();
-        hasAccess = true;
+        hasAccess = false;
     }
     //endregion
 
@@ -86,9 +86,11 @@ public class Professor extends Person {
 
     //region [ - Methods - ]
 
-    //region [ - signUp() - ]
-    public void signUp() {
-        Assistant.addRequestedProfessor(this);
+    //region [ - signUp(Professor professor) - ]
+    public void signUp(Professor professor) {
+        Hogwarts.addRequestedProfessor(professor);
+        Hogwarts.addProfessor(professor);
+        Hogwarts.addAccount(professor.account);
         System.out.println("Your account as a professor is requested to assistants");
     }
     //endregion
@@ -152,6 +154,17 @@ public class Professor extends Person {
         }
         System.out.printf("Course Title :  %s\nStudents :\n", course.getTitle());
         course.getStudents().forEach(s -> System.out.printf("  %s %s\n", s.firstName, s.lastName));
+    }
+    //endregion
+
+    //region [ - requestCourse(Course course) - ]
+    public void requestCourse(Course course) {
+        if (!hasAccess) {
+            System.out.println("!! You don't have access to do this !!");
+            return;
+        }
+
+        Hogwarts.addRequestedCourse(course);
     }
     //endregion
 

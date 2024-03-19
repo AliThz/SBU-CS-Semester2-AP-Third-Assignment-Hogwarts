@@ -124,29 +124,43 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         int command = scanner.nextInt();
 
-        String firstName, lastName, userName, password;
-        int age;
-        System.out.print("First Name :  ");
-        firstName = scanner.next();
-        scanner.nextLine();
-        System.out.print("Last Name :  ");
-        lastName = scanner.next();
-        scanner.nextLine();
-        System.out.print("Age :  ");
-        age = scanner.nextInt();
-        scanner.nextLine();
-        System.out.print("Username :  ");
-        userName = scanner.next();
-        scanner.nextLine();
-        System.out.print("Password :  ");
-        password = scanner.next();
-
         switch (command) {
             case 1:
+                String firstName, lastName, userName, password;
+                int age;
+                System.out.print("First Name :  ");
+                firstName = scanner.next();
+                scanner.nextLine();
+                System.out.print("Last Name :  ");
+                lastName = scanner.next();
+                scanner.nextLine();
+                System.out.print("Age :  ");
+                age = scanner.nextInt();
+                scanner.nextLine();
+                System.out.print("Username :  ");
+                userName = scanner.next();
+                scanner.nextLine();
+                System.out.print("Password :  ");
+                password = scanner.next();
+
                 Professor professor = new Professor(new Account(userName, password, "Professor"), firstName, lastName, age);
                 professor.signUp(professor);
                 break;
             case 2:
+                System.out.print("First Name :  ");
+                firstName = scanner.next();
+                scanner.nextLine();
+                System.out.print("Last Name :  ");
+                lastName = scanner.next();
+                scanner.nextLine();
+                System.out.print("Age :  ");
+                age = scanner.nextInt();
+                scanner.nextLine();
+                System.out.print("Username :  ");
+                userName = scanner.next();
+                scanner.nextLine();
+                System.out.print("Password :  ");
+                password = scanner.next();
                 Student student = new Student(new Account(userName, password, "Student"), firstName, lastName, age);
                 student.signUp(student);
                 break;
@@ -288,7 +302,7 @@ public class Main {
     //region [ - runProfessorMenu(Professor professor) - ]
     public static void runProfessorMenu(Professor professor) {
         System.out.flush();
-        System.out.printf("\n-- Welcome %s %s (%s) Score: %d \n  1,Take Courses\n  2,Score Students\n  3,View Courses List\n  4,View Course's List of Students\n  5,Change Username & Password\n  6,Log Out\nChoose one of the options above :  ", professor.firstName, professor.lastName, professor.account.getRole(), professor.getScore());
+        System.out.printf("\n-- Welcome %s %s (%s) Score: %d \n  1,Take Courses\n  2,Score Students\n  3,View Courses List\n  4,View Course's List of Students\n  5,Request a course\n  6,Change Username & Password\n  7,Log Out\nChoose one of the options above :  ", professor.firstName, professor.lastName, professor.account.getRole(), professor.getScore());
 
         Scanner parameterScanner = new Scanner(System.in);
         Scanner commandScanner = new Scanner(System.in);
@@ -332,6 +346,13 @@ public class Main {
                 professor.viewCourseStudents(course);
                 break;
             case 5:
+                String title;
+                System.out.print("Title :  ");
+                title = parameterScanner.next();
+
+                professor.requestCourse(new Course(title));
+                break;
+            case 6:
                 String userName, password;
                 System.out.print("New Username :  ");
                 userName = parameterScanner.next();
@@ -341,7 +362,8 @@ public class Main {
 
                 professor.account.changeUsername(userName);
                 professor.account.changePassword(password);
-            case 6:
+                break;
+            case 7:
                 professor.logOut();
                 runMenu();
                 break;

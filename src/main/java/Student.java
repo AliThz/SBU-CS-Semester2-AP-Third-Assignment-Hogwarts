@@ -53,6 +53,13 @@ public class Student extends Person {
 
     //region [ - Methods - ]
 
+    //region [ - signUp(Student student) - ]
+    public void signUp(Student student) {
+        Hogwarts.addStudent(student);
+        Hogwarts.addAccount(student.account);
+    }
+    //endregion
+
     //region [ - login(Student student) - ]
     public Student login() {
         for (Student s : Hogwarts.getStudents()) {

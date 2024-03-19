@@ -4,10 +4,6 @@ import java.util.Scanner;
 
 public class Assistant extends Person {
 
-    //region [ - Fields - ]
-
-    //endregion
-
     //region [ - Constructor - ]
 
     //region [ - Assistant(Account account, String firstName, String lastName, int age) - ]
@@ -165,12 +161,10 @@ public class Assistant extends Person {
             System.out.print("Enter a number of the course request you want to accept :  ");
             Scanner in = new Scanner(System.in);
             int index = in.nextInt();
-            Hogwarts.addCourse(Hogwarts.getRequestedCourses().get(index - 1));
-            Hogwarts.getRequestedCourses().remove(index - 1);
-            System.out.println("Course successfully accepted. Do you want to accept others? (y/n)  ");
-            String command = in.nextLine();
-            if (Objects.equals(command, "y")) manageRequestedCourse();
-
+            Course course = Hogwarts.getRequestedCourses().get(index - 1);
+            Hogwarts.addRawCourse(course);
+            Hogwarts.removeRequestedCourse(course);
+            System.out.println("Course successfully accepted.");
         } else {
             System.out.println("!! No assistant has logged in !!");
         }
