@@ -83,8 +83,7 @@ public class Account implements AccountManagement {
     //region [ - validatePassword(String enteredPassword) - ]
     @Override
     public boolean validatePassword(String enteredPassword) {
-//        return password.length() >= 6;
-        return true;
+        return enteredPassword.length() >= 2;
     }
     //endregion
 

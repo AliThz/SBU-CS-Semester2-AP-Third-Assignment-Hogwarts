@@ -17,9 +17,9 @@ public class Main {
         Hogwarts.addProfessor(new Professor(new Account("p2", "p2", "Professor"), "p2", "p2", 50));
         Hogwarts.addProfessor(new Professor(new Account("p3", "p3", "Professor"), "p3", "p3", 60));
 
-        Hogwarts.addStudent(new Student(new Account("s1", "s1", "Student"), "s1", "s1", 10));
-        Hogwarts.addStudent(new Student(new Account("s2", "s2", "Student"), "s2", "s2", 20));
-        Hogwarts.addStudent(new Student(new Account("s3", "s3", "Student"), "s3", "s3", 30));
+        Hogwarts.addStudent(new Student(new Account("s1", "s1", "Student"), "s1", "s1", 10, "Gryffindor"));
+        Hogwarts.addStudent(new Student(new Account("s2", "s2", "Student"), "s2", "s2", 20, "Hufflepuff"));
+        Hogwarts.addStudent(new Student(new Account("s3", "s3", "Student"), "s3", "s3", 30, "Ravenclaw"));
 
         Hogwarts.addCourse(new Course("BP", Hogwarts.getProfessors().get(0)));
         Hogwarts.addCourse(new Course("AP", Hogwarts.getProfessors().get(1)));
@@ -279,6 +279,11 @@ public class Main {
                 parameterScanner.nextLine();
                 System.out.print("New Password :  ");
                 password = parameterScanner.next();
+                while (!assistant.account.validatePassword(password)){
+                    parameterScanner.nextLine();
+                    System.out.print("Your password was not valid\nNew Password :  ");
+                    password = parameterScanner.next();
+                }
 
                 assistant.account.changeUsername(userName);
                 assistant.account.changePassword(password);
@@ -359,6 +364,11 @@ public class Main {
                 parameterScanner.nextLine();
                 System.out.print("New Password :  ");
                 password = parameterScanner.next();
+                while (!professor.account.validatePassword(password)){
+                    parameterScanner.nextLine();
+                    System.out.print("Your password was not valid\nNew Password :  ");
+                    password = parameterScanner.next();
+                }
 
                 professor.account.changeUsername(userName);
                 professor.account.changePassword(password);
@@ -421,6 +431,11 @@ public class Main {
                 parameterScanner.nextLine();
                 System.out.print("New Password :  ");
                 password = parameterScanner.next();
+                while (!student.account.validatePassword(password)){
+                    parameterScanner.nextLine();
+                    System.out.print("Your password was not valid\nNew Password :  ");
+                    password = parameterScanner.next();
+                }
 
                 student.account.changeUsername(userName);
                 student.account.changePassword(password);

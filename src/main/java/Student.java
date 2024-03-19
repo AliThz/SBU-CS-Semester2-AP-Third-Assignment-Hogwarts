@@ -41,6 +41,15 @@ public class Student extends Person {
     }
     //endregion
 
+    //region [ - Student(Account account, String firstName, String lastName, int age) - ]
+    public Student(Account account, String firstName, String lastName, int age, String house) {
+        super(account, firstName, lastName, age);
+        courses = new ArrayList<>();
+        hasLoggedIn = false;
+        this.house = house;
+    }
+    //endregion
+
     //region [ - Student(Account account) - ]
     public Student(Account account) {
         super(account);
