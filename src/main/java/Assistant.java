@@ -5,8 +5,7 @@ import java.util.Scanner;
 public class Assistant extends Person {
 
     //region [ - Fields - ]
-    private static ArrayList<Professor> requestedProfessor;
-    private static ArrayList<Course> requestedCourses;
+
     //endregion
 
     //region [ - Constructor - ]
@@ -15,16 +14,12 @@ public class Assistant extends Person {
     public Assistant(Account account, String firstName, String lastName, int age) {
         super(account, firstName, lastName, age);
         hasLoggedIn = false;
-        requestedProfessor = new ArrayList<>();
-        requestedCourses = new ArrayList<>();
     }
     //endregion
 
     //region [ - Assistant(Account account) - ]
     public Assistant(Account account) {
         super(account);
-        requestedProfessor = new ArrayList<>();
-        requestedCourses = new ArrayList<>();
     }
     //endregion
 
@@ -163,27 +158,15 @@ public class Assistant extends Person {
 
     //endregion
 
-    //region [ - addRequestedCourse(Course course) - ]
-    public static void addRequestedCourse(Course course) {
-        requestedCourses.add(course);
-    }
-    //endregion
-
-    //region [ - addRequestedAccount(Account account) - ]
-    public static void addRequestedProfessor(Professor professor) {
-        requestedProfessor.add(professor);
-    }
-    //endregion
-
     //region [ - manageRequestedCourse() - ]
     public void manageRequestedCourse() {
         if (hasLoggedIn) {
-            requestedCourses.forEach(rc -> System.out.printf("Title :  %s\nProfessor :  %s %s (%d)\n---------------", rc.getTitle(), rc.getProfessor().firstName, rc.getProfessor().lastName, rc.getProfessor().getScore()));
+            Hogwarts.getRequestedCourses().forEach(rc -> System.out.printf("Title :  %s\nProfessor :  %s %s (%d)\n---------------", rc.getTitle(), rc.getProfessor().firstName, rc.getProfessor().lastName, rc.getProfessor().getScore()));
             System.out.print("Enter a number of the course request you want to accept :  ");
             Scanner in = new Scanner(System.in);
             int index = in.nextInt();
-            Hogwarts.addCourse(requestedCourses.get(index - 1));
-            requestedCourses.remove(index - 1);
+            Hogwarts.addCourse(Hogwarts.getRequestedCourses().get(index - 1));
+            Hogwarts.getRequestedCourses().remove(index - 1);
             System.out.println("Course successfully accepted. Do you want to accept others? (y/n)  ");
             String command = in.nextLine();
             if (Objects.equals(command, "y")) manageRequestedCourse();
@@ -197,18 +180,19 @@ public class Assistant extends Person {
     //region [ - manageRequestedProfessor() - ]
     public void manageRequestedProfessor() {
         if (hasLoggedIn) {
-            requestedProfessor.forEach(rq -> System.out.printf("%d, %s %s %d (%s)", requestedProfessor.indexOf(rq) + 1, rq.firstName, rq.lastName, rq.age, rq.account.getUsername()));
-            System.out.println("Enter a number of the professor request you want to accept :  ");
+            for (Professor p : Hogwarts.getProfessors()) {
+                if (!p.getHasAccess()) {
+                    Hogwarts.addRequestedProfessor(p);
+                }
+            }
+            Hogwarts.getRequestedProfessors().forEach(rq -> System.out.printf("\n%d, %s %s %d (%s)\n", Hogwarts.getRequestedProfessors().indexOf(rq) + 1, rq.firstName, rq.lastName, rq.age, rq.account.getUsername()));
+            System.out.print("\nEnter a number of the professor request you want to accept :  ");
             Scanner in = new Scanner(System.in);
             int index = in.nextInt();
-            Professor professor = requestedProfessor.get(index - 1);
-            professor.setHasAccess(true);
-            Hogwarts.addAccount(professor.account);
-            Hogwarts.addProfessor(professor);
-            requestedProfessor.remove(professor);
-            System.out.println("Professor account successfully accepted. Do you want to accept others? (y/n)  ");
-            String command = in.nextLine();
-            if (Objects.equals(command, "y")) manageRequestedProfessor();
+            Professor professor = Hogwarts.getRequestedProfessors().get(index - 1);
+            Hogwarts.getProfessors().stream().filter(p -> p.getHogwartsId() == professor.getHogwartsId()).forEach(p -> p.setHasAccess(true));
+            Hogwarts.removeRequestedProfessor(professor);
+            System.out.println("Professor account successfully accepted.");
 
         } else {
             System.out.println("!! No assistant has logged in !!");

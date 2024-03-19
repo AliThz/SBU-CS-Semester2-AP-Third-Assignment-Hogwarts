@@ -40,6 +40,16 @@ public class Hogwarts {
     public static ArrayList<Course> getCourses() {
         return courses;
     }
+
+    private static ArrayList<Professor> requestedProfessors;
+    public static ArrayList<Professor> getRequestedProfessors() {
+        return requestedProfessors;
+    }
+
+    private static ArrayList<Course> requestedCourses;
+    public static ArrayList<Course> getRequestedCourses() {
+        return requestedCourses;
+    }
     //endregion
 
     //region [ - Constructor - ]
@@ -47,9 +57,11 @@ public class Hogwarts {
         accounts = new ArrayList<>();
         assistants = new ArrayList<>();
         professors = new ArrayList<>();
+        requestedProfessors = new ArrayList<>();
         students = new ArrayList<>();
         rawCourses = new ArrayList<>();
         courses = new ArrayList<>();
+        requestedCourses = new ArrayList<>();
     }
     //endregion
 
@@ -70,6 +82,12 @@ public class Hogwarts {
     //region [ - addProfessor(Professor professor) - ]
     public static void addProfessor(Professor professor) {
         professors.add(professor);
+    }
+    //endregion
+
+    //region [ - addRequestedProfessor(Professor professor) - ]
+    public static void addRequestedProfessor(Professor professor) {
+        requestedProfessors.add(professor);
     }
     //endregion
 
@@ -115,6 +133,12 @@ public class Hogwarts {
     }
     //endregion
 
+    //region [ - removeRequestedProfessor(Professor professor) - ]
+    public static void removeRequestedProfessor(Professor professor) {
+        requestedProfessors.remove(professor);
+    }
+    //endregion
+
     //region [ - removeStudent(Student student) - ]
     public static void removeStudent(Student student) {
         students.remove(student);
@@ -151,7 +175,7 @@ public class Hogwarts {
 
     //region [ - viewAllCourses() - ]
     public static void viewAllCourses() {
-        courses.forEach(c -> System.out.printf("Title :  %s\nProfessor :  %s %s (%d)\n---------------", c.getTitle(), c.getProfessor().firstName, c.getProfessor().lastName, c.getProfessor().getScore()));
+        courses.forEach(c -> System.out.printf("Title :  %s\nProfessor :  %s %s (%d)\n", c.getTitle(), c.getProfessor().firstName, c.getProfessor().lastName, c.getProfessor().getScore()));
     }
     //endregion
 
